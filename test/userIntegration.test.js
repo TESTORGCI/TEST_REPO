@@ -1,7 +1,7 @@
 import assert from 'assert';
 import request from 'supertest';
 import App from '../App.js';
-import DbContext from '../DataContext/DbContext.js';
+import DbContext from '../DataContext/dbContext.js';
 import User from '../Models/user.js';
 
 describe('/v1/user Integration Tests', function () {
