@@ -38,9 +38,9 @@ const DbContext = new Sequelize(
         host : databaseHostName,
         dialect : dialect,
         // timezone : '-05:00',
-        dialectOptions: {
-            useUTC: false
-        },
+        // dialectOptions: {
+        //     useUTC: false
+        // },
     },
 );
 
