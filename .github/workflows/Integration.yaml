@@ -11,7 +11,7 @@ on:
   pull_request:
     branches:
       - main
- 
+      
 jobs:
   integration-test:
     runs-on: ubuntu-latest
@@ -21,7 +21,7 @@ jobs:
         run: |
           sudo apt-get update
           sudo systemctl start mysql.service
-          sudo mysql -u ${{ secrets.DATABASE_USER }} -p {{ secrets.DATABASE_PASSWORD }} -e "CREATE DATABASE IF NOT EXISTS ${DATABASE};"
+          sudo mysql -u ${{ secrets.DATABASE_USER }} -p{{ secrets.DATABASE_PASSWORD }} -e "CREATE DATABASE IF NOT EXISTS ${DATABASE};"
  
       - name: Checkout Repository
         uses: actions/checkout@v2
@@ -30,7 +30,7 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: "20.x"
-
+          
       - name: Install Dependencies
         run: npm install
  
