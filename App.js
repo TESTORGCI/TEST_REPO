@@ -1,7 +1,7 @@
 import dotenv from 'dotenv';
 import express from 'express';
 import router from './Routes/router.js';
-import DbContext from './DataContext/DbContext.js';
+import DbContext from './DataContext/dbContext.js';
 import defaultHeaders from './Middlewear/responseHeaders.js';
 
 // ENVIRONMENT VARIABLES CONFIGURATION
