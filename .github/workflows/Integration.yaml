@@ -1,20 +1,18 @@
 name: Integration Tests
  
 env:
+
   DATABASE_HOSTNAME: ${{ secrets.DATABASE_HOSTNAME }}
   DATABASE_USER: ${{ secrets.DATABASE_USER }}
   DATABASE_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
   DB_PORT: ${{ secrets.DB_PORT }}
   DATABASE: ${{ secrets.DATABASE }}
+
  
 on:
   pull_request:
     branches:
       - main
-  
-  push:
-    branches:
-      - A3
  
 jobs:
   integration-test:
@@ -34,6 +32,7 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: "20.x"
+
  
       - name: Install Dependencies
         run: npm install
