@@ -1,4 +1,4 @@
-import DbContext from "../DataContext/DbContext.js";
+import DbContext from "../DataContext/dbContext.js";
 
 
 // GET METHOD
