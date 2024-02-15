@@ -1,5 +1,5 @@
 import { DataTypes, Sequelize } from "sequelize";
-import DbContext from "../DataContext/DbContext.js";
+import DbContext from "../DataContext/dbContext.js";
 import bcrypt from "bcrypt";
 
 const User = DbContext.define('User',{
