@@ -1,43 +1,38 @@
 name: Integration Tests
-
+ 
+env:
+  DB_HOST: ${{ secrets.DATABASE_HOSTNAME }}
+  DB_USER: ${{ secrets.DATABASE_USER }}
+  DB_PASS: ${{ secrets.DATABASE_PASSWORD }}
+  DB_PORT: ${{ secrets.DB_PORT }}
+  DB_NAME: ${{ secrets.DATABASE }}
+ 
 on:
-  push:
-    branches: [ main ]
   pull_request:
-    branches: [ main ]
-
+    branches:
+      - main
+ 
 jobs:
-  integration-tests:
+  integration-test:
     runs-on: ubuntu-latest
 
-    services:
-      mysql:
-        image: mysql:latest
-        env:
-          MYSQL_ROOT_PASSWORD: ${{ secrets.MYSQL.DATABASE_PASSWORD }}
-          MYSQL_DATABASE: ${{ secrets.MYSQL.DATABASE }}
-          MYSQL_USER: ${{ secrets.MYSQL.DATABASE_USER }}
-          MYSQL_PASSWORD: ${{ secrets.MYSQL.DATABASE_PASSWORD }}
-          
-        ports:
-          - 3306:3306
-        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
-
     steps:
-      - name: Set MySQL root password
+      - name : Install MySQL
         run: |
-          sudo mysql -u root -e "ALTER USER 'root'@'localhost' IDENTIFIED BY '${{ secrets.MYSQL.DATABASE_PASSWORD }}';"
-
-      - name: Checkout repository
+          sudo apt-get update
+          sudo systemctl start mysql.service
+          sudo mysql --user=${secrets.DATABASE_USER} --password=${secrets.DATABASE_PASSWORD} -e "CREATE DATABASE IF NOT EXISTS ${DB_NAME};"
+ 
+      - name: Checkout Repository
         uses: actions/checkout@v2
-
+ 
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '20.x'
-
-      - name: Install dependencies
+          node-version: "14"
+ 
+      - name: Install Dependencies
         run: npm install
-
-      - name: Run integration tests
+ 
+      - name: Run Tests
         run: npm test
