@@ -20,7 +20,9 @@ jobs:
       - name : Install MySQL
         run: |
           sudo apt-get update
-          sudo systemctl start mysql.service
+          sudo yum install mysql-server
+          systemctl start mysqld
+          sudo mysql -u root -e "ALTER USER 'root'@'localhost' IDENTIFIED BY 'root';"
           sudo mysql -u root -proot -e "CREATE DATABASE IF NOT EXISTS ${DATABASE};"
  
       - name: Checkout Repository
