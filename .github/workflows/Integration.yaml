@@ -20,8 +20,9 @@ jobs:
       - name : Install MySQL
         run: |
           sudo apt-get update
-          sudo systemctl start mysql.service
-          sudo mysql -u root -proot -e "CREATE DATABASE IF NOT EXISTS ${DATABASE};"
+          sudo yum install mysql-server
+          systemctl start mysqld
+          sudo mysql -u root -e "CREATE DATABASE IF NOT EXISTS ${{ secrets.DATABASE }};"
  
       - name: Checkout Repository
         uses: actions/checkout@v2
